@@ -1,0 +1,28 @@
+#!/bin/bash
+
+###projeto 01 docker centOS7
+#instalar docker
+yum install docker -y
+
+#criar a pasta docker na raiz do sisema independente de em qual pasta estiver e acessa a pasta criada 
+mkdir /docker
+cd /docker/
+#cria as pasta project01 e project01 dentro da pasta docker
+mkdir project01 project02
+###acessa a pasta project01
+cd project01
+#inicia o serviço docker 
+service docker start
+
+##realizando  download a imagem nginx
+docker pull nginx
+###iniciando o container 
+docker run --rm -ti --name my_nginx -p 80:80 -v $(pwd)/build:/docker/projedt02 nginx
+
+
+#–rm - Indica que o container deve ser removido assim que ele finalizar execução
+#-ti - Emula um interface de terminal interativa
+#–name my-nginx - Define um nome para um container. Caso não informado, um nome aleatório será gerado
+#-p 8080:80 - Define o mapeamento de portas, a porta 80 do Nginx será redirecionada para a porta 8080 da sua máquina
+#-v $(pwd)/build:/usr/share/nginx/html - Monta um volume no container, substituindo o conteúdo das pasta html pela pasta build do nosso projeto. ($(pwd) é uma variável de ambiente contendo o endereço do diretório corrente)
+#nginx - nome da imagem a ser executada
